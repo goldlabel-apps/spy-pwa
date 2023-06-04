@@ -1,3 +1,3 @@
-# pwa
+# Spy
 
-Progressive Web App with React &amp; Material UI
+A Progressive Web App with React &amp; Material UI
