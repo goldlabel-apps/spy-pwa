@@ -19,11 +19,10 @@ import {HumidityChart} from "../"
 export default function Humidity() {
   const dispatch = usePwaDispatch()
   const pwa = usePwaSelect(selectPWA)
-  const {lilly, humidityOpen} = pwa
-  // console.log("humidityOpen", humidityOpen)
-
+  const {lilly, humidityOpen, receiving} = pwa
   const currentHumidity = lilly[0].readings.humidity
-  const bitWhite = "rgba(255,255,255,0.5)"
+  if (!currentHumidity) return null
+  
   return (<>
       <CardActionArea
           onClick={(e: React.MouseEvent) => {
@@ -33,13 +32,15 @@ export default function Humidity() {
         >
 
     <CardHeader 
-        avatar={<Icon icon="humidity" color="warning" />}
-        title={<Font variant="subheader" color={bitWhite}>
+        avatar={<Icon icon="humidity" />}
+        title={<Font variant="subheader">
                 Humidity
             </Font>}
         action={<Box sx={{m:1}}>
-                    <Font variant="giant" color="white">
-                        {Math.floor(currentHumidity)}%
+                    <Font variant="giant">
+                    {receiving ? <>
+                      {Math.floor(currentHumidity)}%
+                      </> : <Icon icon="battery" /> }
                     </Font>
                 </Box>}/>
     </CardActionArea>
